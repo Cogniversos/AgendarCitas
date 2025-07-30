@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamiento de citas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function mostrarCalendarios(calendlyURL, googleCalURL) {
+      document.getElementById('contenedorCalendarios').classList.remove('hidden');
+      document.getElementById('iframeCalendly').src = calendlyURL;
+      document.getElementById('iframeGoogleCal').src = googleCalURL;
+      document.getElementById('contenedorCalendarios').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+  <style>
+    /* Colores del logo */
+    :root {
+      --color-principal: #5B4B8A; /* Morado del logo */
+      --color-secundario: #4CAF50; /* Verde */
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <!-- Header -->
+  <header class="bg-white shadow p-4 sticky top-0 z-50 border-b-4" style="border-color: var(--color-principal);">
+    <h1 class="text-2xl font-bold text-center text-[var(--color-principal)]">Agendamiento de citas</h1>
+  </header>
+
+  <!-- Saludo inicial -->
+  <section class="max-w-4xl mx-auto py-10 text-center">
+    <h2 class="text-3xl font-bold mb-6 text-[var(--color-principal)]">Hola, Dana</h2>
+    <p class="text-lg text-gray-700 mb-6">¿Con quién quieres agendar?</p>
+    
+    <!-- Botones -->
+    <div class="flex flex-wrap justify-center gap-4">
+      <button onclick="mostrarCalendarios(
+        'https://calendly.com/milena-cogniversos/40min', 
+        'https://calendar.google.com/calendar/embed?src=milena.cogniversos%40gmail.com&ctz=America%2FBogota'
+      )" 
+        class="px-6 py-3 rounded-xl text-white font-semibold shadow-md transition"
+        style="background-color: var(--color-principal);"
+        onmouseover="this.style.backgroundColor='#463773'"
+        onmouseout="this.style.backgroundColor='var(--color-principal)'">
+        Agendar con Carol
+      </button>
+
+      <button onclick="mostrarCalendarios(
+        'https://calendly.com/naidelyn-cogniversos/sesion-terapia', 
+        'https://calendar.google.com/calendar/embed?src=naidelyn.cogniversos%40gmail.com&ctz=America%2FBogota'
+      )" 
+        class="px-6 py-3 rounded-xl text-white font-semibold shadow-md transition"
+        style="background-color: var(--color-secundario);"
+        onmouseover="this.style.backgroundColor='#3E8E41'"
+        onmouseout="this.style.backgroundColor='var(--color-secundario)'">
+        Agendar con Naidelyn
+      </button>
+    </div>
+  </section>
+
+  <!-- Contenedor oculto de calendarios -->
+  <section id="contenedorCalendarios" class="hidden">
+    <!-- Calendly -->
+    <section class="max-w-5xl mx-auto px-4 pb-10">
+      <h2 class="text-xl font-semibold mb-3 text-center text-[var(--color-principal)]">Calendly - Agendar cita</h2>
+      <iframe id="iframeCalendly" 
+        src="" 
+        width="100%" height="800" frameborder="0" 
+        class="rounded-xl border shadow bg-white">
+      </iframe>
+    </section>
+
+    <!-- Google Calendar -->
+    <section class="max-w-5xl mx-auto px-4 pb-10">
+      <h2 class="text-xl font-semibold mb-3 text-center text-[var(--color-principal)]">Disponibilidad - Google Calendar</h2>
+      <iframe id="iframeGoogleCal" 
+        src="" 
+        style="border:solid 1px var(--color-principal)" width="100%" height="600" frameborder="0" scrolling="no">
+      </iframe>
+    </section>
+  </section>
+
+</body>
+</html>
