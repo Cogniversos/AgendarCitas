@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Agendamiento de citas</title>
+
+<!-- FAVICON 🧠 -->
+<link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+  <text y='.9em' font-size='90'>🧠</text>
+</svg>">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+:root {
+  --principal: #5B4B8A;
+}
+.active {
+  background-color: var(--principal);
+  color: white;
+}
+</style>
+
+<script>
+const profesionales = [
+  {
+    nombre: "Carol Cano",
+    color: "#5B4B8A",
+    calendly: "https://calendly.com/milena-cogniversos/40min",
+    gcal: "https://calendar.google.com/calendar/embed?src=milena.cogniversos%40gmail.com&ctz=America%2FBogota&mode=WEEK",
+    disponibilidad: "Lunes y miércoles 10:00 am – 7:00 pm · Martes, jueves y viernes 9:00 am – 6:00 pm"
+  },
+  {
+    nombre: "Lorena Gonzalez",
+    color: "#4CAF50",
+    calendly: "https://calendly.com/lorenag-cogniversos/sesion-terapia",
+    gcal: "https://calendar.google.com/calendar/embed?src=lorenag.cogniversos%40gmail.com&ctz=America%2FBogota&mode=WEEK",
+    disponibilidad: "Lunes a sábado 9:00 am 12pm – 6:00 a 9 pm"
+  },
+  {
+    nombre: "Karen Useche",
+    color: "#2196F3",
+    calendly: "https://calendly.com/karen-cogniversos/sesion-terapia",
+    gcal: "https://calendar.google.com/calendar/embed?src=karen.cogniversos%40gmail.com&ctz=America%2FBogota&mode=WEEK",
+    disponibilidad: "lunes a viernes 3:40 a 8pm"
+  },
+  {
+    nombre: "Camila Montealegre",
+    color: "#FF9800",
+    calendly: "https://calendly.com/camila-cogniversos/40min",
+    gcal: "https://calendar.google.com/calendar/embed?src=camila.cogniversos%40gmail.com&ctz=America%2FBogota&mode=WEEK",
+    disponibilidad: "Lunes a sábado 9 a 11am- 4:40 a 9pm"
+  },
+  {
+    nombre: "María Fernanda Arboleda",
+    color: "#9C27B0",
+    calendly: "https://calendly.com/mafernanda-cogniversos/40min",
+    gcal: "https://calendar.google.com/calendar/embed?src=mafernanda.cogniversos%40gmail.com&ctz=America%2FBogota&mode=WEEK",
+    disponibilidad: "Lunes, a viernes 9:40 am 11:40am – 12:00 a 5pm"
+  },
+  {
+    nombre: "Alejandra Ospina",
+    color: "#009688",
+    calendly: "https://calendly.com/alejandra-cogniversos/40min",
+    gcal: "https://calendar.google.com/calendar/embed?src=alejandra.cogniversos%40gmail.com&ctz=America%2FBogota&mode=WEEK",
+    disponibilidad: "lunes a sábado 9am a 12pm, 5pm a 9pm"
+  },
+  {
+    nombre: "Johanna Elizalde",
+    color: "#795548",
+    calendly: "https://calendly.com/johanna-cogniversos/40min",
+    gcal: "https://calendar.google.com/calendar/embed?src=johanna.cogniversos%40gmail.com&ctz=America%2FBogota&mode=WEEK",
+    disponibilidad: "Lunes a sábado 9am a 6pm"
+  },
+  {
+    nombre: "Tatiana Cano",
+    color: "#607D8B",
+    calendly: "https://calendly.com/tatiana-cogniversos/40min",
+    gcal: "https://calendar.google.com/calendar/embed?src=tatiana.cogniversos%40gmail.com&ctz=America%2FBogota&mode=WEEK",
+    disponibilidad: "Lunes a sábado de 12 a 9pm"
+  }
+];
+
+function cargarAgenda(index) {
+  const p = profesionales[index];
+
+  document.getElementById("nombreActivo").innerText = p.nombre;
+  document.getElementById("nombreActivo").style.color = p.color;
+  document.getElementById("calendlyFrame").src = p.calendly;
+  document.getElementById("calendarFrame").src = p.gcal;
+
+  document.querySelectorAll(".btn-prof").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  document.getElementById(`btn-${index}`).classList.add("active");
+}
+
+// Atajos de teclado 1–8
+document.addEventListener("keydown", (e) => {
+  const n = parseInt(e.key);
+  if (n >= 1 && n <= profesionales.length) {
+    cargarAgenda(n - 1);
+  }
+});
+</script>
+</head>
+
+<body class="bg-gray-100 h-screen overflow-hidden">
+
+<header class="bg-white shadow px-6 py-4 border-b-4" style="border-color: var(--principal)">
+  <h1 class="text-2xl font-bold text-[var(--principal)]">
+    Agendamiento de citas
+  </h1>
+</header>
+
+<main class="flex h-[calc(100vh-90px)]">
+
+  <!-- LISTA -->
+  <aside class="w-1/4 bg-white border-r p-4 overflow-y-auto">
+    <h2 class="font-semibold mb-4">Profesionales (teclas 1–8)</h2>
+
+    <div class="space-y-2">
+      <script>
+        profesionales.forEach((p, i) => {
+          document.write(`
+            <button id="btn-${i}"
+              onclick="cargarAgenda(${i})"
+              class="btn-prof w-full text-left px-4 py-3 rounded hover:bg-gray-100">
+              <div>
+                <div class="font-medium">${i + 1}. ${p.nombre}</div>
+                <div class="text-xs text-gray-500 mt-1">
+                  ${p.disponibilidad}
+                </div>
+              </div>
+            </button>
+          `);
+        });
+      </script>
+    </div>
+  </aside>
+
+  <!-- AGENDA -->
+  <section class="flex-1 p-4 overflow-hidden">
+    <h2 id="nombreActivo" class="text-2xl font-bold mb-3 text-gray-500">
+      Selecciona una profesional
+    </h2>
+
+    <div class="grid grid-cols-2 gap-4 h-full">
+
+      <div class="bg-white rounded shadow overflow-hidden">
+        <h3 class="text-center font-semibold py-2 border-b">Agendar sesión</h3>
+        <iframe id="calendlyFrame" src="" class="w-full h-full"></iframe>
+      </div>
+
+      <div class="bg-white rounded shadow overflow-hidden">
+        <h3 class="text-center font-semibold py-2 border-b">Disponibilidad semanal</h3>
+        <iframe id="calendarFrame" src="" class="w-full h-full"></iframe>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
