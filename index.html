@@ -128,11 +128,16 @@ function copiarMensaje() {
 }
 /* 🔑 ATAJOS DE TECLADO 1–8 */
 document.addEventListener("keydown", (e) => {
+
+  // 🚫 Si está escribiendo en un input o textarea, no hacer nada
+  const tag = e.target.tagName.toLowerCase();
+  if (tag === "input" || tag === "textarea") return;
+
   const n = parseInt(e.key);
   if (!isNaN(n) && n >= 1 && n <= profesionales.length) {
     cargarAgenda(n - 1);
   }
-  });
+});
 </script>
 </head>
 
