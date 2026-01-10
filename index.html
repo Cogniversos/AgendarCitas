@@ -20,6 +20,10 @@
   background-color: var(--principal);
   color: white;
 }
+.btn-prof.active div {
+  color: white;
+}
+
 </style>
 
 <script>
@@ -160,16 +164,21 @@ document.addEventListener("keydown", (e) => {
     <h2 class="font-semibold mb-3">Profesionales</h2>
 
     <div class="space-y-2 mb-4">
-      <script>
-        profesionales.forEach((p, i) => {
-          document.write(`
-            <button id="btn-${i}" onclick="cargarAgenda(${i})"
-            class="btn-prof w-full text-left px-4 py-2 rounded hover:bg-gray-100">
-              ${p.nombre}
-            </button>
-          `);
-        });
-      </script>
+     <script>
+  profesionales.forEach((p, i) => {
+    document.write(`
+      <button id="btn-${i}" onclick="cargarAgenda(${i})"
+      class="btn-prof w-full text-left px-4 py-2 rounded hover:bg-gray-100">
+        
+        <div class="font-medium">${p.nombre}</div>
+        <div class="text-xs text-gray-500 leading-tight">
+          ${p.disponibilidad}
+        </div>
+
+      </button>
+    `);
+  });
+</script>
     </div>
 
     <h3 id="nombreActivo" class="font-bold mb-2">Copia el mensaje para Whatsapp</h3>
