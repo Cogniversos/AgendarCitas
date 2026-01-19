@@ -23,12 +23,11 @@
 .btn-prof.active div {
   color: white;
 }
-
 </style>
 
 <script>
 const profesionales = [
-   {
+  {
     nombre: "Carol Cano",
     color: "#5B4B8A",
     calendly: "https://calendly.com/milena-cogniversos/40min",
@@ -51,14 +50,6 @@ const profesionales = [
     gcal: "https://calendar.google.com/calendar/embed?src=karen.cogniversos%40gmail.com&ctz=America%2FBogota&mode=WEEK",
     disponibilidad: "lunes a viernes 3:40 a 8pm",
     llavePago: "@LB3143260828"
-  },
-  {
-    nombre: "Camila Montealegre",
-    color: "#FF9800",
-    calendly: "https://calendly.com/camila-cogniversos/40min",
-    gcal: "https://calendar.google.com/calendar/embed?src=camila.cogniversos%40gmail.com&ctz=America%2FBogota&mode=WEEK",
-    disponibilidad: "Lunes a sábado 9 a 11am- 4:40 a 9pm",
-    llavePago: "@LB3214854579"
   },
   {
     nombre: "María Fernanda Arboleda",
@@ -128,7 +119,7 @@ Link de Google Meet: ${meet}
 
 Recuerda que puedes hacer el pago de la sesión hasta 1 hora antes por la llave ${llave}
 
- En caso de que necesites cancelar o reagendar, debes hacerlo con mínimo 12 horas de anticipación. Si lo haces después de este tiempo, deberás asumir el costo total de la sesión, dado que ese espacio ya estaba reservado en la agenda de la psicóloga 😊
+En caso de que necesites cancelar o reagendar, debes hacerlo con mínimo 12 horas de anticipación. Si lo haces después de este tiempo, deberás asumir el costo total de la sesión, dado que ese espacio ya estaba reservado en la agenda de la psicóloga 😊
 `.trim();
 }
 
@@ -136,10 +127,9 @@ function copiarMensaje() {
   navigator.clipboard.writeText(document.getElementById("mensaje").value);
   alert("Mensaje copiado ✅");
 }
-/* 🔑 ATAJOS DE TECLADO 1–8 */
-document.addEventListener("keydown", (e) => {
 
-  // 🚫 Si está escribiendo en un input o textarea, no hacer nada
+/* 🔑 ATAJOS DE TECLADO */
+document.addEventListener("keydown", (e) => {
   const tag = e.target.tagName.toLowerCase();
   if (tag === "input" || tag === "textarea") return;
 
@@ -159,26 +149,23 @@ document.addEventListener("keydown", (e) => {
 
 <main class="flex h-[calc(100vh-90px)]">
 
-  <!-- COLUMNA IZQUIERDA -->
   <aside class="w-1/3 bg-white border-r p-4 overflow-y-auto">
     <h2 class="font-semibold mb-3">Profesionales</h2>
 
     <div class="space-y-2 mb-4">
-     <script>
-  profesionales.forEach((p, i) => {
-    document.write(`
-      <button id="btn-${i}" onclick="cargarAgenda(${i})"
-      class="btn-prof w-full text-left px-4 py-2 rounded hover:bg-gray-100">
-        
-        <div class="font-medium">${p.nombre}</div>
-        <div class="text-xs text-gray-500 leading-tight">
-          ${p.disponibilidad}
-        </div>
-
-      </button>
-    `);
-  });
-</script>
+      <script>
+        profesionales.forEach((p, i) => {
+          document.write(`
+            <button id="btn-${i}" onclick="cargarAgenda(${i})"
+            class="btn-prof w-full text-left px-4 py-2 rounded hover:bg-gray-100">
+              <div class="font-medium">${p.nombre}</div>
+              <div class="text-xs text-gray-500 leading-tight">
+                ${p.disponibilidad}
+              </div>
+            </button>
+          `);
+        });
+      </script>
     </div>
 
     <h3 id="nombreActivo" class="font-bold mb-2">Copia el mensaje para Whatsapp</h3>
@@ -195,7 +182,6 @@ document.addEventListener("keydown", (e) => {
     </button>
   </aside>
 
-  <!-- COLUMNA DERECHA -->
   <section class="flex-1 grid grid-cols-2 gap-2 p-4">
     <iframe id="calendlyFrame" class="w-full h-full border rounded"></iframe>
     <iframe id="calendarFrame" class="w-full h-full border rounded"></iframe>
